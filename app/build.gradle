@@ -1,0 +1,147 @@
+apply plugin: 'com.android.application'
+apply from: '../gradle/dexcount.gradle'
+apply from: '../gradle/jacoco.gradle'
+apply from: '../gradle/quality.gradle'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        applicationId "igmen.julious.androidpractice"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        warningsAsErrors true
+        abortOnError true
+
+        // temporarily disabled until Butterknife becomes 9.0.0, when its
+        // butterknife.lint.InvalidR2UsageDetector Lint bug is fixed
+        disable 'ObsoleteLintCustomCheck'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    sourceSets {
+        test.java.srcDir 'src/tests/commons/java'
+        test.java.srcDir 'src/tests/unit/java'
+        androidTest.java.srcDir 'src/tests/ui/java'
+        androidTest.java.srcDir 'src/tests/commons/java'
+    }
+
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+    }
+
+    testOptions.unitTests.all {
+        // only failing tests will be shown on the test logs
+        testLogging {
+            events 'failed'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+}
+
+dependencies {
+    androidTestImplementation libraries.dagger
+    androidTestImplementation libraries.supportAnnotations
+    androidTestImplementation libraries.supportAppCompat
+    androidTestImplementation libraries.supportDesign
+    androidTestImplementation libraries.supportRecyclerView
+
+    androidTestImplementation testLibraries.assertJ
+    androidTestImplementation testLibraries.dexmaker
+    androidTestImplementation testLibraries.dexmakerDx
+    androidTestImplementation testLibraries.dexmakerMockito
+    androidTestImplementation testLibraries.espressoCore
+    androidTestImplementation testLibraries.espressoIntents
+    androidTestImplementation testLibraries.espressoContrib
+    androidTestImplementation(testLibraries.mockWebServer) {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+        exclude group: 'com.squareup.okio', module: 'okio'
+    }
+    androidTestImplementation testLibraries.testRules
+
+    androidTestAnnotationProcessor libraries.daggerCompiler
+
+    androidTestImplementation testLibraries.testRunner
+    androidTestUtil testLibraries.testOrchestrator
+
+    annotationProcessor(libraries.butterknifeCompiler) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    annotationProcessor libraries.daggerCompiler
+    annotationProcessor libraries.daggerProcessor
+    annotationProcessor libraries.roomProcessor
+
+    implementation(libraries.butterknife) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-compat'
+    }
+    implementation libraries.cardview
+    implementation libraries.constraintLayout
+    implementation libraries.dagger
+    implementation libraries.daggerAndroidSupport
+    implementation libraries.dataFactory
+    implementation libraries.gson
+    implementation libraries.lifecycleCommons
+    implementation libraries.lifecycleExtensions
+    implementation libraries.mosbyMvp
+    implementation libraries.okHttpLogging
+    implementation libraries.retrofit
+    implementation libraries.retrofitGsonConverter
+    implementation libraries.retrofitRxJavaAdapter
+    implementation libraries.room
+    implementation libraries.roomRxJava2
+    implementation libraries.rxAndroid
+    implementation libraries.rxFingerprint
+    implementation libraries.rxJava
+    implementation libraries.supportAnnotations
+    implementation libraries.supportAppCompat
+    implementation libraries.supportDesign
+    implementation libraries.timber
+
+    implementation debugTools.leakCanary
+
+    testImplementation testLibraries.androidArchitectureCore
+    testImplementation testLibraries.assertJ
+    testImplementation testLibraries.junit
+    testImplementation testLibraries.mockito
+    testImplementation(testLibraries.mockWebServer) {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+        exclude group: 'com.squareup.okio', module: 'okio'
+    }
+    testImplementation testLibraries.robolectric
+    testImplementation testLibraries.roomMigration
+}

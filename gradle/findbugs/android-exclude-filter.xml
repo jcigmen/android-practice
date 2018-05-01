@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- fingerprint classes that are imported from an old sample chinese project -->
+    <Match>
+        <Class name="android_serialport_api.AsyncFingerprint"/>
+    </Match>
+    <Match>
+        <Class name="android_serialport_api.SerialPort"/>
+    </Match>
+    <Match>
+        <Class name="android_serialport_api.SerialPortFingerprintScanner"/>
+    </Match>
+
+    <Match>
+        <Class name="~.*\.R\$.*"/>
+    </Match>
+    <Match>
+        <Class name="~.*\.Manifest\$.*"/>
+    </Match>
+    <!-- All bugs in test classes, except for JUnit-specific bugs -->
+    <Match>
+        <Class name="~.*\.*Test"/>
+        <Not>
+            <Bug code="IJU"/>
+        </Not>
+    </Match>
+
+
+</FindBugsFilter>

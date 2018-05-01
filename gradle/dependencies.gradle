@@ -1,0 +1,128 @@
+ext.versions = [
+        // App values
+        code                 : 1,
+        name                 : '00.00.01',
+        minSdk               : 21,
+        targetSdk            : 26,
+        compileSdk           : 26,
+        buildTools           : '26.0.2',
+
+        // Debug tools
+        dexcount             : '0.6.1',
+        leakCanary           : '1.5',
+
+        // Gradle plugins
+        android              : '3.0.1',
+        jacoco               : '0.7.6.201602180812',
+
+        // Libraries
+        butterknife          : '8.8.1',
+        constraintLayout     : '1.0.2',
+        dagger               : '2.11',
+        gson                 : '2.4',
+        lifecycleExtensions  : '1.0.0',
+        mosbyMvp             : '2.0.0',
+        okHttpLogging        : '3.3.1',
+        retrofit             : '2.1.0',
+        retrofitRxJavaAdapter: '1.0.0',
+        room                 : '1.0.0',
+        rxAndroid            : '2.0.1',
+        rxFingerprint        : '2.1.0',
+        rxJava               : '2.1.9',
+        supportLibs          : '27.0.1',
+        timber               : '4.6.0',
+
+        // Test libraries
+        assertJ              : '2.5.0',
+        espresso             : '3.0.1',
+        dataFactory          : '0.8',
+        dexmaker             : '1.4',
+        junit                : '4.12',
+        mockito              : '1.10.19',
+        mockWebServer        : '3.2.0',
+        orchestrator         : '1.0.1',
+        robolectric          : '3.1.4',
+        supportTestRunner    : '1.0.1'
+]
+
+ext.debugTools = [
+        leakCanary       : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
+]
+
+ext.gradlePlugins = [
+        android          : "com.android.tools.build:gradle:$versions.android",
+        dexcount         : "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$versions.dexcount",
+        jacoco           : "org.jacoco:org.jacoco.core:$versions.jacoco",
+]
+
+ext.libraries = [
+        butterknife          : "com.jakewharton:butterknife:$versions.butterknife",
+        butterknifeCompiler  : "com.jakewharton:butterknife-compiler:$versions.butterknife",
+        cardview             : "com.android.support:cardview-v7:$versions.supportLibs",
+        constraintLayout     : "com.android.support.constraint:constraint-layout:$versions.constraintLayout",
+        dagger               : "com.google.dagger:dagger:$versions.dagger",
+        daggerAndroidSupport : "com.google.dagger:dagger-android-support:$versions.dagger",
+        daggerCompiler       : "com.google.dagger:dagger-compiler:$versions.dagger",
+        daggerProcessor      : "com.google.dagger:dagger-android-processor:$versions.dagger",
+        dataFactory          : "org.fluttercode.datafactory:datafactory:$versions.dataFactory",
+        gson                 : "com.google.code.gson:gson:$versions.gson",
+        lifecycleCommons     : "android.arch.lifecycle:common-java8:$versions.lifecycleExtensions",
+        lifecycleExtensions  : "android.arch.lifecycle:extensions:$versions.lifecycleExtensions",
+        mosbyMvp             : "com.hannesdorfmann.mosby:mvp:$versions.mosbyMvp",
+        okHttpLogging        : "com.squareup.okhttp3:logging-interceptor:$versions.okHttpLogging",
+        retrofit             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        retrofitRxJavaAdapter: "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$versions.retrofitRxJavaAdapter",
+        room                 : "android.arch.persistence.room:runtime:$versions.room",
+        roomProcessor        : "android.arch.persistence.room:compiler:$versions.room",
+        roomRxJava2          : "android.arch.persistence.room:rxjava2:$versions.room",
+        rxAndroid            : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+        rxFingerprint        : "com.mtramin:rxfingerprint:$versions.rxFingerprint",
+        rxJava               : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+        supportAnnotations   : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat     : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign        : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView  : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        timber               : "com.jakewharton.timber:timber:$versions.timber",
+]
+ext.testLibraries = [
+        androidArchitectureCore : "android.arch.core:core-testing:$versions.room",
+        assertJ        : "org.assertj:assertj-core:$versions.assertJ",
+        dexmaker       : "com.crittercism.dexmaker:dexmaker:$versions.dexmaker",
+        dexmakerDx     : "com.crittercism.dexmaker:dexmaker-dx:$versions.dexmaker",
+        dexmakerMockito: "com.crittercism.dexmaker:dexmaker-mockito:$versions.dexmaker",
+        espressoCore   : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+        espressoIntents: "com.android.support.test.espresso:espresso-intents:$versions.espresso",
+        espressoContrib: "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+        junit          : "junit:junit:$versions.junit",
+        mockito        : "org.mockito:mockito-core:$versions.mockito",
+        mockWebServer  : "com.squareup.okhttp3:mockwebserver:$versions.mockWebServer",
+        robolectric    : "org.robolectric:robolectric:$versions.robolectric",
+        roomMigration  : "android.arch.persistence.room:testing:$versions.room",
+        testRules      : "com.android.support.test:rules:$versions.testRunner",
+        testRunner     : "com.android.support.test:runner:$versions.testRunner",
+        testOrchestrator : "com.android.support.test:orchestrator:$versions.orchestrator"
+]
+
+ext.testCoverageExclusions = [
+        '**/*Application*.*',
+        '**/*Activity*.*',
+        '**/*Component*.*',
+        '**/*Factory*.*',
+        '**/*Fragment*.*',
+        '**/*Dao*.*',
+        '**/R.class',
+        '**/R$*.class',
+        '**/*RetrofitService*.*',
+        '**/*Subcomponent*.*',
+        '**/*$ViewInjector*.*',
+        '**/*$ViewBinder*.*',
+        '**/BuildConfig.*',
+        '**/Manifest*.*',
+        '**/*$Lambda$*.*',
+        '**/*$inlined$*.*',
+        '**/*Module.*',
+        '**/*Dagger*.*',
+        '**/*MembersInjector*.*',
+        '**/*_Provide*Factory*.*'
+]

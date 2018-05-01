@@ -1,0 +1,36 @@
+apply from: 'gradle/dependencies.gradle'
+
+buildscript {
+    apply from: 'gradle/dependencies.gradle'
+    
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath gradlePlugins.android
+        classpath gradlePlugins.dexcount
+        classpath gradlePlugins.jacoco
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            url "https://maven.google.com"
+            name 'Google'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
